@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>October — For Saanviii</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;600&family=Great+Vibes&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   BASE
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    background:
+        radial-gradient(circle at 70% 22%, rgba(215,230,245,.09), transparent 25%),
+        radial-gradient(circle at 20% 80%, rgba(150,100,130,.06), transparent 30%),
+        linear-gradient(145deg,#030913,#07111f 48%,#0a1727);
+
+    color:#f7f3ea;
+    font-family:'Quicksand',sans-serif;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.moon{
+    position:absolute;
+
+    width:270px;
+    height:270px;
+
+    border-radius:50%;
+
+    top:7%;
+    right:11%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff 0%,
+            #eef4f7 35%,
+            #dce7ed 65%,
+            #c8d6df 100%
+        );
+
+    box-shadow:
+        0 0 35px rgba(230,240,250,.25),
+        0 0 100px rgba(210,230,245,.12);
+}
+
+.moon::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(circle at 30% 40%,rgba(120,135,145,.13),transparent 9%),
+        radial-gradient(circle at 70% 30%,rgba(120,135,145,.10),transparent 7%),
+        radial-gradient(circle at 55% 70%,rgba(120,135,145,.09),transparent 12%);
+}
+
+.star{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    opacity:.55;
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.5);
+}
+
+.star:nth-child(2){top:16%;left:13%}
+.star:nth-child(3){top:31%;left:29%;width:3px;height:3px}
+.star:nth-child(4){top:12%;left:53%}
+.star:nth-child(5){top:42%;left:8%}
+.star:nth-child(6){top:64%;left:18%}
+.star:nth-child(7){top:24%;left:78%}
+.star:nth-child(8){top:58%;left:86%}
+.star:nth-child(9){top:78%;left:71%}
+.star:nth-child(10){top:70%;left:38%}
+.star:nth-child(11){top:88%;left:12%}
+.star:nth-child(12){top:51%;left:56%}
+
+.particle{
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:rgba(225,238,245,.45);
+
+    animation:float 9s linear infinite;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(110vh) translateX(0);
+        opacity:0;
+    }
+
+    20%{
+        opacity:.6;
+    }
+
+    80%{
+        opacity:.45;
+    }
+
+    100%{
+        transform:translateY(-20vh) translateX(50px);
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader{
+    position:fixed;
+    inset:0;
+
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#030913;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader-text{
+    font-family:'Cinzel',serif;
+
+    letter-spacing:5px;
+
+    font-size:12px;
+
+    opacity:.65;
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+.music{
+    position:fixed;
+
+    top:22px;
+    right:22px;
+
+    z-index:1000;
+
+    width:42px;
+    height:42px;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    border-radius:50%;
+
+    background:rgba(5,13,24,.6);
+
+    backdrop-filter:blur(10px);
+
+    color:#f7f3ea;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.3s;
+}
+
+.music:hover{
+    transform:scale(1.06);
+
+    border-color:rgba(255,255,255,.4);
+}
+
+
+/* =========================================================
+   POPUPS
+========================================================= */
+
+.popup{
+    position:fixed;
+    inset:0;
+
+    z-index:100;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+
+    opacity:0;
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
+}
+
+.popup.active{
+    opacity:1;
+    visibility:visible;
+
+    pointer-events:auto;
+}
+
+.popup-content{
+    width:min(720px,92vw);
+    max-height:86vh;
+
+    overflow:auto;
+
+    text-align:center;
+
+    padding:55px 42px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,27,43,.82),
+            rgba(4,12,23,.88)
+        );
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.4),
+        inset 0 1px rgba(255,255,255,.04);
+
+    transform:
+        translateY(20px)
+        scale(.97);
+
+    transition:
+        transform .7s cubic-bezier(.2,.8,.2,1);
+}
+
+.popup.active .popup-content{
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.popup-content::-webkit-scrollbar{
+    width:4px;
+}
+
+.popup-content::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.15);
+    border-radius:10px;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+.eyebrow{
+    font-family:'Cinzel',serif;
+
+    font-size:11px;
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    opacity:.55;
+
+    margin-bottom:20px;
+}
+
+.title{
+    font-family:'Cinzel Decorative',serif;
+
+    font-size:clamp(28px,6vw,55px);
+
+    font-weight:400;
+
+    line-height:1.2;
+
+    letter-spacing:1px;
+}
+
+.subtitle{
+    margin-top:16px;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:clamp(30px,5vw,45px);
+
+    color:#dceaf3;
+}
+
+.big-text{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(26px,4vw,39px);
+
+    line-height:1.35;
+
+    font-weight:500;
+}
+
+.body-text{
+    margin-top:20px;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(21px,3vw,27px);
+
+    line-height:1.65;
+
+    color:#eeeae3;
+}
+
+.small{
+    margin-top:15px;
+
+    font-size:13px;
+
+    letter-spacing:1px;
+
+    opacity:.55;
+}
+
+
+/* =========================================================
+   SEPTEMBER READABILITY FIX
+========================================================= */
+
+.september-text{
+    position:relative;
+
+    z-index:10;
+
+    display:inline-block;
+
+    padding:13px 24px;
+
+    border-radius:15px;
+
+    background:rgba(3,9,18,.62);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.9),
+        0 0 20px rgba(0,0,0,.55);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.18),
+        inset 0 1px rgba(255,255,255,.04);
+}
+
+
+/* =========================================================
+   DIVIDERS
+========================================================= */
+
+.divider{
+    width:55px;
+    height:1px;
+
+    background:rgba(255,255,255,.25);
+
+    margin:28px auto;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.next{
+    margin-top:35px;
+
+    padding:13px 25px;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.04);
+
+    color:#f7f3ea;
+
+    font-family:'Quicksand',sans-serif;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.35s;
+}
+
+.next:hover{
+    background:rgba(255,255,255,.1);
+
+    border-color:rgba(255,255,255,.4);
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================================================
+   COZY SECTION
+========================================================= */
+
+.cozy{
+    padding:30px;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(220,235,245,.07),
+            rgba(160,110,135,.05)
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.script{
+    font-family:'Dancing Script',cursive;
+
+    font-size:30px;
+
+    color:#dceaf3;
+}
+
+
+/* =========================================================
+   SAANVI PHOTO CARD
+========================================================= */
+
+.saanvi-card{
+    position:relative;
+
+    overflow:hidden;
+}
+
+.photo-frame{
+    position:relative;
+
+    width:min(330px,78vw);
+
+    margin:5px auto 28px;
+
+    padding:10px 10px 18px;
+
+    background:#f5f0e8;
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.45),
+        0 0 35px rgba(210,225,240,.08);
+
+    transform:rotate(-2deg);
+
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease;
+}
+
+.photo-frame:hover{
+    transform:rotate(0deg) scale(1.02);
+
+    box-shadow:
+        0 25px 65px rgba(0,0,0,.5),
+        0 0 45px rgba(220,235,245,.12);
+}
+
+.photo-frame img{
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+    max-height:430px;
+
+    object-fit:cover;
+
+    border-radius:1px;
+}
+
+.photo-sparkle{
+    position:absolute;
+
+    color:#f7f3ea;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,.8);
+
+    animation:
+        sparkleFloat 3s ease-in-out infinite;
+}
+
+.sparkle-one{
+    top:-13px;
+    right:-13px;
+
+    font-size:22px;
+}
+
+.sparkle-two{
+    bottom:12px;
+    left:-17px;
+
+    font-size:17px;
+
+    animation-delay:.7s;
+}
+
+.sparkle-three{
+    top:40%;
+    right:-20px;
+
+    font-size:14px;
+
+    animation-delay:1.3s;
+}
+
+@keyframes sparkleFloat{
+
+    0%,100%{
+        transform:translateY(0) scale(1);
+        opacity:.45;
+    }
+
+    50%{
+        transform:translateY(-7px) scale(1.15);
+        opacity:1;
+    }
+}
+
+.saanvi-title{
+    margin-top:12px;
+
+    font-family:'Cinzel Decorative',serif;
+
+    font-size:clamp(25px,5vw,42px);
+
+    letter-spacing:2px;
+
+    color:#f7f3ea;
+
+    text-shadow:
+        0 0 20px rgba(255,255,255,.08);
+}
+
+.hehe{
+    margin-top:5px;
+
+    font-family:'Dancing Script',cursive;
+
+    font-size:25px;
+
+    color:#d9c2cc;
+}
+
+.saanvi-message{
+    margin-top:22px;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(25px,4vw,34px);
+
+    line-height:1.3;
+
+    color:#eee9e1;
+}
+
+.lol{
+    margin-top:9px;
+
+    font-family:'Quicksand',sans-serif;
+
+    font-size:13px;
+
+    letter-spacing:3px;
+
+    opacity:.55;
+}
+
+.mwah{
+    margin-top:18px;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:34px;
+
+    color:#dec4cf;
+}
+
+
+/* =========================================================
+   MARRIAGE SECTION
+========================================================= */
+
+.marriage{
+    font-family:'Great Vibes',cursive;
+
+    font-size:clamp(34px,6vw,55px);
+
+    color:#e4ccd7;
+
+    line-height:1.3;
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.final-title{
+    font-family:'Cinzel Decorative',serif;
+
+    font-size:clamp(25px,5vw,48px);
+
+    line-height:1.45;
+}
+
+.heart-line{
+    margin-top:25px;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:34px;
+
+    color:#d8bcc9;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    .moon{
+        width:210px;
+        height:210px;
+
+        top:8%;
+        right:-20px;
+
+        opacity:.82;
+    }
+
+    .popup{
+        padding:18px;
+    }
+
+    .popup-content{
+        padding:40px 25px;
+
+        max-height:88vh;
+    }
+
+    .music{
+        top:15px;
+        right:15px;
+    }
+
+    .body-text{
+        font-size:21px;
+
+        line-height:1.55;
+    }
+
+    .big-text{
+        font-size:28px;
+    }
+
+    .photo-frame{
+        width:min(300px,78vw);
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOADER
+===================================================== -->
+
+<div class="loader" id="loader">
+
+    <div class="loader-text">
+        OCTOBER IS ARRIVING...
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background">
+
+    <div class="moon"></div>
+
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+
+</div>
+
+
+<!-- =====================================================
+     MUSIC
+===================================================== -->
+
+<audio id="music" loop>
+
+    <source src="oct.mp3" type="audio/mpeg">
+
+</audio>
+
+<button
+    class="music"
+    id="musicBtn"
+    onclick="toggleMusic()"
+>
+    ♪
+</button>
+
+
+<!-- =====================================================
+     POPUP 0 — INTRO
+===================================================== -->
+
+<section class="popup active" id="popup0">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            01 — October
+        </div>
+
+        <h1 class="title">
+            HELLO, OCTOBER
+        </h1>
+
+        <div class="subtitle">
+            for Saanviii
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="small">
+            a little something before the cold nights begin
+        </p>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            OPEN MY LETTER →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 1 — SEPTEMBER
+===================================================== -->
+
+<section class="popup" id="popup1">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            September → October
+        </div>
+
+        <div class="september-text">
+
+            <div class="big-text">
+                September is ending.
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="big-text">
+                And October begins.
+            </div>
+
+        </div>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            CONTINUE →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 2 — COLD NIGHTS
+===================================================== -->
+
+<section class="popup" id="popup2">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            the colder nights
+        </div>
+
+        <div class="cozy">
+
+            <div class="big-text">
+
+                October aa raha hai…
+                thand bhi aayegiii ❄️✨
+
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="script">
+
+                raat ko kambal mein
+                baatein karenge hehe 🎀✨
+
+            </p>
+
+        </div>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            NEXT →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 3 — MY SAANVI
+===================================================== -->
+
+<section class="popup" id="popup3">
+
+    <div class="popup-content saanvi-card">
+
+        <div class="eyebrow">
+            okay but...
+        </div>
+
+
+        <div class="photo-frame">
+
+            <img
+                src="bby (1).jpg"
+                alt="My Saanvi"
+            >
+
+            <div class="photo-sparkle sparkle-one">
+                ✦
+            </div>
+
+            <div class="photo-sparkle sparkle-two">
+                ✧
+            </div>
+
+            <div class="photo-sparkle sparkle-three">
+                ✦
+            </div>
+
+        </div>
+
+
+        <div class="saanvi-title">
+            MY SAANVI
+        </div>
+
+        <div class="hehe">
+            HEHEHEHEHEHEHEHEHE
+        </div>
+
+
+        <div class="saanvi-message">
+
+            mera terepe,<br>
+            tujhse jyaada haqq h OKEY!!
+
+        </div>
+
+
+        <div class="lol">
+            Lol
+        </div>
+
+
+        <div class="mwah">
+            Mwah, Lobb Yuuu 🎀✨
+        </div>
+
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            OKAY NOW CONTINUE →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 4 — LETTER START
+===================================================== -->
+
+<section class="popup" id="popup4">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            Dear Saanviii
+        </div>
+
+        <div class="body-text">
+
+            Idk, bas I wanted to tell you today
+            how muchhh special you actually are to me ✨
+
+            <br><br>
+
+            I love you today,
+            <br>
+
+            I'll love you tomorrow,
+            <br>
+
+            and forever onnn ✨
+
+            <br><br>
+
+            I just hope you always get the peace
+            and happiness you deserve,
+            even on the days when things feel
+            a little too much, yaar ✨
+
+        </div>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            KEEP READING →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 5 — OCTOBER WISHES
+===================================================== -->
+
+<section class="popup" id="popup5">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            October wishes
+        </div>
+
+        <div class="body-text">
+
+            I really hope your October goes well, yaar ✨
+
+            <br><br>
+
+            I hope you study well for your boards
+            or preboards,
+            and I hope all your hard work pays off.
+
+            <br><br>
+
+            And I hope your results never hurt you
+            or scare you, bas.
+
+            <br><br>
+
+            I hope they never make you feel
+            like you're not good enough.
+
+            <br><br>
+
+            Whatever happens,
+            I'll still be proud of you
+            for trying and giving your best,
+            hamesha ⭐
+
+        </div>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            NEXT →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 6 — TWO DAYS
+===================================================== -->
+
+<section class="popup" id="popup6">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            these past two days
+        </div>
+
+        <div class="body-text">
+
+            And yaar, pichle 2 din hum baat kiye na…
+
+            <br><br>
+
+            bahut khushi hui bahuttt jyaadaa
+
+            <br>
+
+            I wasss sooo happpieyyyy 🎀✨
+
+            <br><br>
+
+            Idk, bas tumse baat karke hi
+            itna achha lagta hai.
+
+            <br><br>
+
+            Even your random little things
+            mean so much to me,
+            pata nahi whyyy 🩷
+
+        </div>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            NEXT →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 7 — PERFECT
+===================================================== -->
+
+<section class="popup" id="popup7">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            remember this
+        </div>
+
+        <div class="body-text">
+
+            And you don't have to be perfect
+            for me to be proud of you, okay?
+
+            <br><br>
+
+            Just keep being you, bas.
+
+            <br><br>
+
+            That's enough for me ⭐
+
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="script">
+            always.
+        </p>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            NEXT →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 8 — FUTURE
+===================================================== -->
+
+<section class="popup" id="popup8">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            someday
+        </div>
+
+        <div class="body-text">
+
+            And I hope one day we'll look back
+            at these little September–October
+            messages and laugh at how cute
+            and stupid we used to be, yaar ✨
+
+            <br><br>
+
+            Like imagine hum dono reading this
+            after years…
+
+            <br><br>
+
+            pata nahi kitnaaa cute lagega 🩷🎀
+
+            <br><br>
+
+            I just hope we get to make
+            so many more memories together ✨
+
+        </div>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            KEEP GOING →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 9 — BHAGWAN
+===================================================== -->
+
+<section class="popup" id="popup9">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            one thing
+        </div>
+
+        <div class="body-text">
+
+            Even If Bhagwan Humko Alag Karne
+            Ka Try Bhi Kiye Na…
+
+            <br><br>
+
+            Saanvii Or Mujhee
+            KOII BHII ALAG NI KAR SAKTA!!
+
+            <br><br>
+
+            Heheh...<3 🎀✨
+
+        </div>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            NEXT →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 10 — STUDY
+===================================================== -->
+
+<section class="popup" id="popup10">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            one more thing
+        </div>
+
+        <div class="body-text">
+
+            Please study well too, okay?
+
+            <br><br>
+
+            Boards hain after all,
+            padhai toh karni padegiii 🎀✨
+
+            <br><br>
+
+            May this October bring you
+            good days, peaceful nights,
+            good memories,
+            and lots of reasons to smile ✨
+
+        </div>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            NEXT →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 11 — MARRIAGE
+===================================================== -->
+
+<section class="popup" id="popup11">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            secret wish
+        </div>
+
+        <div class="marriage">
+
+            Anddd may you always dream
+            about marrying me too… 🎀✨
+
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="small">
+            yes, I said what I said.
+        </p>
+
+        <button
+            class="next"
+            onclick="nextPopup()"
+        >
+            ONE LAST THING →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP 12 — FINAL
+===================================================== -->
+
+<section class="popup" id="popup12">
+
+    <div class="popup-content">
+
+        <div class="eyebrow">
+            for you, Saanviii
+        </div>
+
+        <div class="final-title">
+
+            September is ending.
+
+            <br><br>
+
+            October is coming.
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="body-text">
+
+            but my love for you
+            isn't changinggg ✨
+
+            <br><br>
+
+            I love you today
+
+            <br>
+
+            I'll love you tomorrow
+
+            <br>
+
+            and forever onnn 🩷🎀✨
+
+        </div>
+
+        <div class="heart-line">
+            Saanviii
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        document
+            .getElementById("loader")
+            .classList.add("hide");
+
+    },1000);
+
+});
+
+
+/* =========================================================
+   POPUP SYSTEM
+========================================================= */
+
+let currentPopup = 0;
+
+function nextPopup(){
+
+    const current =
+        document.getElementById(
+            "popup" + currentPopup
+        );
+
+    if(current){
+        current.classList.remove("active");
+    }
+
+    currentPopup++;
+
+    const next =
+        document.getElementById(
+            "popup" + currentPopup
+        );
+
+    if(next){
+
+        next.classList.add("active");
+
+    }
+
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+const music =
+    document.getElementById("music");
+
+const musicBtn =
+    document.getElementById("musicBtn");
+
+let playing = false;
+
+
+function startMusic(){
+
+    music.volume = 0;
+
+    music.play()
+    .then(() => {
+
+        playing = true;
+
+        musicBtn.innerHTML = "Ⅱ";
+
+        let volume = 0;
+
+        const fade =
+            setInterval(() => {
+
+                volume += 0.02;
+
+                if(volume >= 0.35){
+
+                    volume = 0.35;
+
+                    clearInterval(fade);
+
+                }
+
+                music.volume = volume;
+
+            },100);
+
+    })
+    .catch(() => {});
+
+}
+
+
+function toggleMusic(){
+
+    if(playing){
+
+        music.pause();
+
+        playing = false;
+
+        musicBtn.innerHTML = "♪";
+
+    }
+
+    else{
+
+        music.play();
+
+        playing = true;
+
+        musicBtn.innerHTML = "Ⅱ";
+
+        music.volume = 0.35;
+
+    }
+
+}
+
+
+/* =========================================================
+   START MUSIC ON FIRST BUTTON
+========================================================= */
+
+document
+    .querySelector("#popup0 .next")
+    .addEventListener("click",() => {
+
+        startMusic();
+
+    });
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(
+        e.key === "ArrowRight" ||
+        e.key === "Enter"
+    ){
+
+        nextPopup();
+
+    }
+
+});
+
+
+/* =========================================================
+   TOUCH SWIPE
+========================================================= */
+
+let touchStartX = 0;
+
+document.addEventListener(
+    "touchstart",
+    (e)=>{
+
+        touchStartX =
+            e.changedTouches[0].screenX;
+
+    }
+);
+
+
+document.addEventListener(
+    "touchend",
+    (e)=>{
+
+        const touchEndX =
+            e.changedTouches[0].screenX;
+
+        const difference =
+            touchStartX - touchEndX;
+
+        if(difference > 70){
+
+            nextPopup();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   FLOATING PARTICLES
+========================================================= */
+
+for(let i = 0; i < 18; i++){
+
+    const particle =
+        document.createElement("div");
+
+    particle.className = "particle";
+
+    particle.style.left =
+        Math.random() * 100 + "%";
+
+    particle.style.animationDelay =
+        Math.random() * 8 + "s";
+
+    particle.style.animationDuration =
+        (7 + Math.random() * 7) + "s";
+
+    document
+        .querySelector(".background")
+        .appendChild(particle);
+
+}
+
+</script>
+
+</body>
+</html>
